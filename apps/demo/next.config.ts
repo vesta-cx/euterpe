@@ -1,7 +1,11 @@
 import type { NextConfig } from "next";
 
 const nextConfig: NextConfig = {
-  transpilePackages: ["mediabunny", "@mediabunny/mp3-encoder"],
+  /* config options here */
 };
 
 export default nextConfig;
+
+// added by create cloudflare to enable calling `getCloudflareContext()` in `next dev`
+import { initOpenNextCloudflareForDev } from '@opennextjs/cloudflare';
+initOpenNextCloudflareForDev();

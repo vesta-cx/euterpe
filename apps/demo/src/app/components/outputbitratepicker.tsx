@@ -1,7 +1,7 @@
 "use client";
 
-import { ButtonGroup } from "../../components/ui/button-group";
-import { Button } from "../../components/ui/button";
+import { ButtonGroup } from "@/app/components/ui/button-group";
+import { Button } from "@/app/components/ui/button";
 
 type Props = {
   bitrates: number[];

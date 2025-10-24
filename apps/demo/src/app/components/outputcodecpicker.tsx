@@ -1,8 +1,8 @@
 "use client";
 
-import type { CodecKey } from "../lib/transcode";
-import { ButtonGroup } from "../../components/ui/button-group";
-import { Button } from "../../components/ui/button";
+import type { CodecKey } from "../../lib/transcode";
+import { ButtonGroup } from "@/app/components/ui/button-group";
+import { Button } from "@/app/components/ui/button";
 
 type Option = {
   key: CodecKey;

@@ -1,6 +1,6 @@
 "use client";
 
-import { useEffect, useRef } from "react";
+import { useEffect, useRef, useState } from "react";
 
 type Props = {
   bitrates: number[];
@@ -51,6 +51,10 @@ export default function BitratePicker({
     if (veryHighRef.current)
       veryHighRef.current.indeterminate = groupPartial(veryHigh);
   }, [selected]);
+  const [hydrated, setHydrated] = useState(false);
+  useEffect(() => {
+    setHydrated(true);
+  }, []);
   return (
     <div className="rounded-xl border border-zinc-200 bg-white p-5 shadow-sm dark:border-zinc-800 dark:bg-zinc-900">
       <div className="mb-3 flex items-center justify-between">
@@ -121,7 +125,7 @@ export default function BitratePicker({
                     onChange={() => onToggle(kbps)}
                   />
                   <span
-                    className={`text-sm text-zinc-900 dark:text-zinc-100 ${!isChecked ? "opacity-80" : ""}`}
+                    className={`text-sm text-zinc-900 dark:text-zinc-100 ${hydrated ? (!isChecked ? "opacity-80" : "") : ""}`}
                   >
                     {kbps}
                   </span>

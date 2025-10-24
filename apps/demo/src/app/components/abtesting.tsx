@@ -1,14 +1,14 @@
 "use client";
 
 import { useEffect, useMemo, useRef, useState } from "react";
-import type { ResultItem } from "../lib/transcode";
-import { CODECS } from "../lib/transcode";
-import type { CodecKey } from "../lib/transcode";
+import type { ResultItem } from "../../lib/transcode";
+import { CODECS } from "../../lib/transcode";
+import type { CodecKey } from "../../lib/transcode";
 import OutputCodecPicker from "./outputcodecpicker";
 import OutputBitratePicker from "./outputbitratepicker";
-import { Button } from "../../components/ui/button";
-import { Popover, PopoverContent, PopoverTrigger } from "../../components/ui/popover";
-import { Slider } from "../../components/ui/slider";
+import { Button } from "@/app/components/ui/button";
+import { Popover, PopoverContent, PopoverTrigger } from "@/app/components/ui/popover";
+import { Slider } from "@/app/components/ui/slider";
 import { PauseIcon, PlayIcon, Volume2Icon } from "lucide-react";
 
 type Props = {

@@ -1,7 +1,7 @@
 "use client";
 
-import { useMemo } from "react";
-import type { CodecKey, CodecOption, SupportMap } from "../lib/transcode";
+import { useMemo, useState, useEffect } from "react";
+import type { CodecKey, CodecOption, SupportMap } from "../../lib/transcode";
 
 type Props = {
   options: CodecOption[];
@@ -24,6 +24,8 @@ export default function CodecPicker({
   onSelectAll,
   onClear,
 }: Props) {
+  const [hydrated, setHydrated] = useState(false);
+  useEffect(() => setHydrated(true), []);
   const unsupportedSelected = useMemo(() => {
     if (isProbing) return [] as CodecOption[];
     return options.filter(
@@ -89,12 +91,12 @@ export default function CodecPicker({
                 />
                 <div className="flex flex-col">
                   <span
-                    className={`text-sm font-medium text-zinc-900 dark:text-zinc-100 ${!isChecked ? "opacity-80" : ""}`}
+                    className={`text-sm font-medium text-zinc-900 dark:text-zinc-100 ${hydrated ? (!isChecked ? "opacity-80" : "") : ""}`}
                   >
                     {c.label}
                   </span>
                   <span
-                    className={`text-xs text-zinc-600 dark:text-zinc-400 ${!isChecked ? "opacity-80" : ""}`}
+                    className={`text-xs text-zinc-600 dark:text-zinc-400 ${hydrated ? (!isChecked ? "opacity-80" : "") : ""}`}
                   >
                     .{c.ext}
                   </span>

@@ -1,8 +1,8 @@
 "use client";
 
 import React from "react";
-import type { ResultItem } from "../lib/transcode";
-import { humanSize } from "../lib/transcode";
+import type { ResultItem } from "../../lib/transcode";
+import { humanSize } from "../../lib/transcode";
 
 type Props = {
   results: ResultItem[];

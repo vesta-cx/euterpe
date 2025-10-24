@@ -1,7 +1,7 @@
 "use client";
 
 import { persistentAtom } from "@nanostores/persistent";
-import type { CodecKey } from "../lib/transcode";
+import type { CodecKey } from "../../lib/transcode";
 
 export const selectedCodecsStore = persistentAtom<string>(
   "selectedCodecs",

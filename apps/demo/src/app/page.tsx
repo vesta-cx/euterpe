@@ -2,12 +2,12 @@
 
 import { useEffect, useMemo, useRef, useState } from "react";
 
-import { useStore } from "@nanostores/react";
+// persistent nanostores are synced after hydration to avoid SSR mismatch
 import { ArrowRightIcon } from "lucide-react";
 import { toast } from "sonner";
-import { Accordion, AccordionContent, AccordionItem, AccordionTrigger } from "../components/ui/accordion";
-import { Button } from "../components/ui/button";
-import { Toaster } from "../components/ui/sonner";
+import { Accordion, AccordionContent, AccordionItem, AccordionTrigger } from "@/app/components/ui/accordion";
+import { Button } from "@/app/components/ui/button";
+import { Toaster } from "@/app/components/ui/sonner";
 import ABTesting from "./components/abtesting";
 import BitratePicker from "./components/bitratepicker";
 import CodecPicker from "./components/codecpicker";
@@ -25,32 +25,31 @@ import {
     probeEncodingSupport,
     revokeResults,
     transcodeFileToJobsInWorkers,
-} from "./lib/transcode";
+} from "../lib/transcode";
 import { selectedBitratesStore, selectedCodecsStore } from "./stores/selections";
 
 export default function Home() {
     const [file, setFile] = useState<File | null>(null);
     const [theme, setTheme] = useState<"light" | "dark">("light");
-    const codecsJson = useStore(selectedCodecsStore);
-    const bitratesJson = useStore(selectedBitratesStore);
     const [stage, setStage] = useState<"configure" | "run">("configure");
 
-    // Selections
-    const [selectedCodecs, setSelectedCodecs] = useState<Set<CodecKey>>(() => {
-        try {
-            return new Set<CodecKey>(JSON.parse(codecsJson || "[]"));
-        } catch {
-            return new Set<CodecKey>(["mp3", "opus"]);
-        }
-    });
+    // Selections (start with defaults to keep SSR output stable)
+    const [selectedCodecs, setSelectedCodecs] = useState<Set<CodecKey>>(new Set<CodecKey>(["mp3", "opus"]));
 
-    const [selectedBitrates, setSelectedBitrates] = useState<Set<number>>(() => {
+    const [selectedBitrates, setSelectedBitrates] = useState<Set<number>>(new Set<number>([96, 128, 160]));
+
+    // Hydrate persisted selections after mount to avoid rendering mismatch
+    useEffect(() => {
         try {
-            return new Set<number>(JSON.parse(bitratesJson || "[]"));
-        } catch {
-            return new Set<number>([96, 128, 160]);
-        }
-    });
+            const rawCodecs = localStorage.getItem("selectedCodecs");
+            if (rawCodecs) setSelectedCodecs(new Set<CodecKey>(JSON.parse(rawCodecs)));
+        } catch {}
+        try {
+            const rawBitrates = localStorage.getItem("selectedBitrates");
+            if (rawBitrates) setSelectedBitrates(new Set<number>(JSON.parse(rawBitrates)));
+        } catch {}
+        // eslint-disable-next-line react-hooks/exhaustive-deps
+    }, []);
 
     // Environment probing
 
@@ -389,10 +388,6 @@ export default function Home() {
 
             if (next.has(key)) next.delete(key);
             else next.add(key);
-
-            try {
-                selectedCodecsStore.set(JSON.stringify(Array.from(next)));
-            } catch {}
             return next;
         });
     }
@@ -418,13 +413,26 @@ export default function Home() {
 
             if (next.has(kbps)) next.delete(kbps);
             else next.add(kbps);
-
-            try {
-                selectedBitratesStore.set(JSON.stringify(Array.from(next)));
-            } catch {}
             return next;
         });
     }
+
+    // Persist selections to both nanostores and localStorage after hydration
+    useEffect(() => {
+        try {
+            const arr = Array.from(selectedCodecs);
+            selectedCodecsStore.set(JSON.stringify(arr));
+            localStorage.setItem("selectedCodecs", JSON.stringify(arr));
+        } catch {}
+    }, [selectedCodecs]);
+
+    useEffect(() => {
+        try {
+            const arr = Array.from(selectedBitrates);
+            selectedBitratesStore.set(JSON.stringify(arr));
+            localStorage.setItem("selectedBitrates", JSON.stringify(arr));
+        } catch {}
+    }, [selectedBitrates]);
 
     function selectAllBitrates() {
         const all = new Set(BITRATES_KBPS);
