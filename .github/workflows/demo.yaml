@@ -132,4 +132,4 @@ jobs:
                   packageManager: pnpm
 
             - name: Log Cloudflare Worker deployment details
-              run: "echo 'URL: ${{ steps.wrangler.outputs.deployment-url }}' >> $GITHUB_STEP_SUMMARY"
+              run: "echo 'URL: ${{ steps.wrangler.outputs.deployment-url }}' >> $GITHUB_OUTPUT"
