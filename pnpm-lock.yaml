@@ -20,9 +20,36 @@ importers:
 
   apps/demo:
     dependencies:
+      '@illuxiza/nanostores-immer':
+        specifier: ^0.1.0
+        version: 0.1.0(immer@10.2.0)(nanostores@1.0.1)
+      '@mediabunny/mp3-encoder':
+        specifier: ^1.24.2
+        version: 1.24.2(mediabunny@1.24.2)
+      '@nanostores/media-query':
+        specifier: ^0.1.1
+        version: 0.1.1(nanostores@1.0.1)
+      '@nanostores/persistent':
+        specifier: ^1.2.0
+        version: 1.2.0(nanostores@1.0.1)
+      immer:
+        specifier: ^10.2.0
+        version: 10.2.0
+      mediabunny:
+        specifier: ^1.24.2
+        version: 1.24.2
+      nanostores:
+        specifier: ^1.0.1
+        version: 1.0.1
+      sonner:
+        specifier: ^2.0.7
+        version: 2.0.7(react-dom@19.2.0(react@19.2.0))(react@19.2.0)
       tailwindcss-animate:
         specifier: ^1.0.7
         version: 1.0.7(tailwindcss@4.1.16)
+      zon:
+        specifier: ^1.0.3
+        version: 1.0.3
     devDependencies:
       '@eslint/compat':
         specifier: ^1.4.0
@@ -1346,6 +1373,13 @@ packages:
     resolution: {integrity: sha512-bV0Tgo9K4hfPCek+aMAn81RppFKv2ySDQeMoSZuvTASywNTnVJCArCZE2FWqpvIatKu7VMRLWlR1EazvVhDyhQ==}
     engines: {node: '>=18.18'}
 
+  '@illuxiza/nanostores-immer@0.1.0':
+    resolution: {integrity: sha512-2eLg0RJoZ4pqTepxOw3I4vgldtyi6zrXmnCNGmstE8s2R/xQdWZ0QdASC9G4XgAUCukX9piURINDE9kBsZjWLA==}
+    engines: {node: ^20.0.0 || >=22.0.0}
+    peerDependencies:
+      immer: ^10.0.0
+      nanostores: ^1.0.0
+
   '@img/colour@1.0.0':
     resolution: {integrity: sha512-A5P/LfWGFSl6nsckYtjw9da+19jB8hkJ6ACTGcDfEJ0aE+l2n2El7dsVM7UVHZQ9s2lmYMWlrS21YLy2IR1LUw==}
     engines: {node: '>=18'}
@@ -1745,6 +1779,12 @@ packages:
     resolution: {integrity: sha512-0ySxHa5JKfjyopG19OJMs6/7i01lCLHkbvp2XqXrOrjsuxRAF20m1Py0twFhLMFESIKQbfWQUhCVgvuWOwWlfg==}
     peerDependencies:
       mediabunny: ^1.0.0
+
+  '@nanostores/media-query@0.1.1':
+    resolution: {integrity: sha512-fzbKmh7nFSWNV/l+8WRImhWkt22sdMnw8q8EK5kQU9I0l1fEiJGJdqTx7sDs0HkYfShYb9xA6PNok5Ap86fyhA==}
+    engines: {node: ^20.0.0 || ^22.0.0 || >= 24.0.0}
+    peerDependencies:
+      nanostores: ^0.9.0 || ^0.10.0 || ^0.11.0 || ^1.0.0
 
   '@nanostores/persistent@1.2.0':
     resolution: {integrity: sha512-kf5WOLpVI9Pk+AwXHIax4in3pesNe8299BEGQ2H8kgI05SZw7KKWCDv7bt2FOlND8E5y7rO5PRW34q0UCAl/DA==}
@@ -4623,6 +4663,9 @@ packages:
     resolution: {integrity: sha512-Hs59xBNfUIunMFgWAbGX5cq6893IbWg4KnrjbYwX3tx0ztorVgTDA6B2sxf8ejHJ4wz8BqGUMYlnzNBer5NvGg==}
     engines: {node: '>= 4'}
 
+  immer@10.2.0:
+    resolution: {integrity: sha512-d/+XTN3zfODyjr89gM3mPq1WNX2B8pYsu7eORitdwyA2sBubnTl3laYlBk4sXY5FUa5qTZGBDPJICVbvqzjlbw==}
+
   import-fresh@3.3.1:
     resolution: {integrity: sha512-TR3KfrTZTYLPB6jUjfx6MF9WcWrHL9su5TObK4ZkYgBdWKPOFoSoQIdEuTuR82pmtxH2spWG9h6etwfr1pLBqQ==}
     engines: {node: '>=6'}
@@ -6599,6 +6642,9 @@ packages:
   zod@4.1.12:
     resolution: {integrity: sha512-JInaHOamG8pt5+Ey8kGmdcAcg3OL9reK8ltczgHTAwNhMys/6ThXHityHxVV2p3fkw/c+MAvBHFVYHFZDmjMCQ==}
 
+  zon@1.0.3:
+    resolution: {integrity: sha512-FKLlkaI8bU0ORFgZIzbqgvT7ei7aHob2jvhDPLgkwxccDurBRviDlD2eC2px6kEox0VlW0rK3VBwjsvtGV6g0w==}
+
 snapshots:
 
   '@alloc/quick-lru@5.2.0': {}
@@ -8081,6 +8127,11 @@ snapshots:
 
   '@humanwhocodes/retry@0.4.3': {}
 
+  '@illuxiza/nanostores-immer@0.1.0(immer@10.2.0)(nanostores@1.0.1)':
+    dependencies:
+      immer: 10.2.0
+      nanostores: 1.0.1
+
   '@img/colour@1.0.0':
     optional: true
 
@@ -8386,6 +8437,10 @@ snapshots:
   '@mediabunny/mp3-encoder@1.24.2(mediabunny@1.24.2)':
     dependencies:
       mediabunny: 1.24.2
+
+  '@nanostores/media-query@0.1.1(nanostores@1.0.1)':
+    dependencies:
+      nanostores: 1.0.1
 
   '@nanostores/persistent@1.2.0(nanostores@1.0.1)':
     dependencies:
@@ -11779,6 +11834,8 @@ snapshots:
 
   ignore@7.0.5: {}
 
+  immer@10.2.0: {}
+
   import-fresh@3.3.1:
     dependencies:
       parent-module: 1.0.1
@@ -13829,3 +13886,5 @@ snapshots:
   zod@3.22.3: {}
 
   zod@4.1.12: {}
+
+  zon@1.0.3: {}
