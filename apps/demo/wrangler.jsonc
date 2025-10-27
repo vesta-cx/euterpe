@@ -9,7 +9,7 @@
   },
   "routes": [
     {
-      "pattern": "demo.vesta.cx/euterpe(/*)?",
+      "pattern": "demo.vesta.cx",
       "zone_name": "vesta.cx",
       "custom_domain": true
     },
@@ -18,6 +18,7 @@
     "production": {
       "name": "euterpe-demo-prod",
       "routes": [
+        
         {
           "pattern": "demo.vesta.cx/euterpe(/*)?",
           "zone_name": "vesta.cx",
@@ -28,9 +29,13 @@
       "name": "euterpe-demo-dev",
       "routes": [
         {
-          "pattern": "dev.demo.vesta.cx/euterpe(/*)?",
+          "pattern": "dev.demo.vesta.cx",
           "zone_name": "vesta.cx",
           "custom_domain": true
+        },
+        {
+          "pattern": "dev.demo.vesta.cx/euterpe(/*)?",
+          "zone_name": "vesta.cx",
         },
       ],
     },
@@ -38,9 +43,13 @@
       "name": "euterpe-demo-staging",
       "routes": [
         {
-          "pattern": "staging.demo.vesta.cx/euterpe(/*)?",
+          "pattern": "staging.demo.vesta.cx",
           "zone_name": "vesta.cx",
           "custom_domain": true
+        },
+        {
+          "pattern": "staging.demo.vesta.cx/euterpe(/*)?",
+          "zone_name": "vesta.cx",
         },
       ],
     },
