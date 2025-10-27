@@ -133,13 +133,4 @@ jobs:
 
       - name: Log Cloudflare Worker deployment details
         run: |
-          echo "Cloudflare Worker deployment details: >> $GITHUB_OUTPUT"
-          echo "Environment: ${{ env.ENVIRONMENT }} >> $GITHUB_OUTPUT"
-          echo "Account ID: ${{ secrets.CLOUDFLARE_ACCOUNT_ID }} >> $GITHUB_OUTPUT"
-          echo "API Token: ${{ secrets.CLOUDFLARE_API_TOKEN }} >> $GITHUB_OUTPUT"
-          echo "Working Directory: apps/demo >> $GITHUB_OUTPUT"
-          echo "Package Manager: pnpm >> $GITHUB_OUTPUT"
-          echo "Deployment ID: ${{ steps.wrangler.outputs.deploymentId }} >> $GITHUB_OUTPUT"
-          echo "Deployment URL: ${{ steps.wrangler.outputs.deploymentUrl }} >> $GITHUB_OUTPUT"
-          echo "Deployment Status: ${{ steps.wrangler.outputs.deploymentStatus }} >> $GITHUB_OUTPUT"
-          echo "Deployment Log: ${{ steps.wrangler.outputs.deploymentLog }} >> $GITHUB_OUTPUT"
+          echo "URL: ${{ steps.wrangler.outputs.deployment-url }} >> $GITHUB_OUTPUT"
