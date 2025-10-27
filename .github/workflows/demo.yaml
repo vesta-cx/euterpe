@@ -148,7 +148,8 @@ jobs:
                   # from git branch and commit hash
                   key: build-cache-${{ runner.os }}-${{ github.sha }}
 
-            - name: Build & Deploy Worker
+            - name: Deploy Worker
+              id: wrangler
               uses: cloudflare/wrangler-action@v3
               with:
                   apiToken: ${{ secrets.CLOUDFLARE_API_TOKEN }}
@@ -156,3 +157,16 @@ jobs:
                   environment: ${{ env.ENVIRONMENT }}
                   workingDirectory: apps/demo
                   packageManager: pnpm
+
+            - name: Log Cloudflare Worker deployment details
+              run: |
+                echo "Cloudflare Worker deployment details: >> $GITHUB_OUTPUT"
+                echo "Environment: ${{ env.ENVIRONMENT }} >> $GITHUB_OUTPUT"
+                echo "Account ID: ${{ secrets.CLOUDFLARE_ACCOUNT_ID }} >> $GITHUB_OUTPUT"
+                echo "API Token: ${{ secrets.CLOUDFLARE_API_TOKEN }} >> $GITHUB_OUTPUT"
+                echo "Working Directory: apps/demo >> $GITHUB_OUTPUT"
+                echo "Package Manager: pnpm >> $GITHUB_OUTPUT"
+                echo "Deployment ID: ${{ steps.wrangler.outputs.deploymentId }} >> $GITHUB_OUTPUT"
+                echo "Deployment URL: ${{ steps.wrangler.outputs.deploymentUrl }} >> $GITHUB_OUTPUT"
+                echo "Deployment Status: ${{ steps.wrangler.outputs.deploymentStatus }} >> $GITHUB_OUTPUT"
+                echo "Deployment Log: ${{ steps.wrangler.outputs.deploymentLog }} >> $GITHUB_OUTPUT"
