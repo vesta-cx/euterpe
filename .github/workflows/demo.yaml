@@ -37,7 +37,7 @@ jobs:
               id: cache-node-modules
               uses: actions/cache@v4
               with:
-                  path: "apps/demo/node_modules"
+                  path: "**/node_modules"
                   key: ${{ runner.os }}-node-modules-${{ hashFiles('pnpm-lock.yaml') }}
 
             - name: Install pnpm
@@ -54,13 +54,13 @@ jobs:
 
             - name: Install dependencies
               if: steps.cache-node-modules.outputs.cache-hit != 'true'
-              run: pnpm install --filter @vesta-cx/euterpe-demo
+              run: pnpm install
 
             - name: Cache Node Modules
               id: cache-node-modules
               uses: actions/cache@v4
               with:
-                  path: "apps/demo/node_modules"
+                  path: "**/node_modules"
                   key: ${{ runner.os }}-node-modules-${{ hashFiles('pnpm-lock.yaml') }}
 
     build:
@@ -84,7 +84,7 @@ jobs:
               id: cache-node-modules
               uses: actions/cache@v4
               with:
-                  path: "apps/demo/node_modules"
+                  path: "**/node_modules"
                   key: ${{ runner.os }}-node-modules-${{ hashFiles('pnpm-lock.yaml') }}
 
             - name: Cache Build Output
