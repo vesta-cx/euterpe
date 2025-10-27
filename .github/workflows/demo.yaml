@@ -46,10 +46,10 @@ jobs:
 
             - name: Cache Node Modules
               id: cache-node-modules
-              uses: actions/cache@v4
+              uses: actions/cache/save@v4
               with:
                   path: "**/node_modules"
-                  key: node-modules-cache-${{ runner.os }}-${{ hashFiles('pnpm-lock.yaml') }}
+                  key: node-modules-cache-${{ runner.os }}-${{ github.sha }}
 
             - name: Install dependencies
               if: steps.cache-node-modules.outputs.cache-hit != 'true'
@@ -72,14 +72,6 @@ jobs:
             - name: Checkout
               uses: actions/checkout@v5
 
-            - name: Cache Build Output
-              id: cache-build-output
-              uses: actions/cache@v4
-              with:
-                  path: "apps/demo/dist"
-                  # from git branch and commit hash
-                  key: build-cache-${{ runner.os }}-${{ github.sha }}
-
             - name: Install pnpm
               uses: pnpm/action-setup@v4
               with:
@@ -93,13 +85,21 @@ jobs:
 
             - name: Cache Node Modules
               id: cache-node-modules
-              uses: actions/cache@v4
+              uses: actions/cache/restore@v4
               with:
                   path: "**/node_modules"
-                  key: node-modules-cache-${{ runner.os }}-${{ hashFiles('pnpm-lock.yaml') }}
+                  key: node-modules-cache-${{ runner.os }}-${{ github.sha }}
 
             - name: Build Vite Project
               run: pnpm build --filter=@vesta-cx/euterpe-demo -- --mode ${{ env.ENVIRONMENT }}
+
+            - name: Cache Build Output
+              id: cache-build-output
+              uses: actions/cache/save@v4
+              with:
+                  path: "apps/demo/dist"
+                  # from git branch and commit hash
+                  key: build-cache-${{ runner.os }}-${{ github.sha }}
 
     deploy:
         name: Deploy to Cloudflare Workers
@@ -132,9 +132,16 @@ jobs:
                   node-version: ${{ vars.NODE_VERSION }}
                   cache: "pnpm"
 
+            - name: Cache Node Modules
+              id: cache-node-modules
+              uses: actions/cache/restore@v4
+              with:
+                  path: "**/node_modules"
+                  key: node-modules-cache-${{ runner.os }}-${{ github.sha }}
+
             - name: Restore Build Cache
               id: cache-build-output
-              uses: actions/cache@v4
+              uses: actions/cache/restore@v4
               with:
                   fail-on-cache-miss: true
                   path: "apps/demo/dist"
