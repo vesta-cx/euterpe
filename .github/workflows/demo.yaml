@@ -38,7 +38,7 @@ jobs:
               uses: actions/cache@v4
               with:
                   path: "apps/demo/node_modules"
-                  key: ${{ runner.os }}-node-modules-${{ hashFiles('apps/demo/pnpm-lock.yaml') }}
+                  key: ${{ runner.os }}-node-modules-${{ hashFiles('pnpm-lock.yaml') }}
 
             - name: Install pnpm
               if: steps.cache-node-modules.outputs.cache-hit != 'true'
@@ -78,7 +78,7 @@ jobs:
               uses: actions/cache@v4
               with:
                   path: "apps/demo/node_modules"
-                  key: ${{ runner.os }}-node-modules-${{ hashFiles('apps/demo/pnpm-lock.yaml') }}
+                  key: ${{ runner.os }}-node-modules-${{ hashFiles('pnpm-lock.yaml') }}
 
             - name: Cache Build Output
               id: cache-build-output
