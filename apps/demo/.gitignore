@@ -1,8 +1,9 @@
 # prod
 dist/
-dist-server/
 
 # dev
+.hono/
+.wrangler/
 .yarn/
 !.yarn/releases
 .vscode/*
@@ -14,7 +15,6 @@ dist-server/
 
 # deps
 node_modules/
-.wrangler
 
 # env
 .env
