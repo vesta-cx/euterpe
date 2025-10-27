@@ -4,7 +4,7 @@
  */
 {
   "$schema": "node_modules/wrangler/config-schema.json",
-  "name": "demo",
+  "name": "euterpe-demo",
   "main": ".svelte-kit/cloudflare/_worker.js",
   "compatibility_date": "2025-10-24",
   "compatibility_flags": ["nodejs_als"],
@@ -31,7 +31,17 @@
       ],
     },
     "development": {
-      "routes": [],
+      "routes": [
+        {
+          "pattern": "dev.demo.vesta.cx",
+          "zone_name": "vesta.cx",
+          "custom_domain": true,
+        },
+        {
+          "pattern": "dev.demo.vesta.cx/euterpe/*",
+          "zone_name": "vesta.cx",
+        },
+      ],
     },
     "staging": {
       "routes": [
