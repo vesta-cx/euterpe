@@ -48,7 +48,7 @@ jobs:
               with:
                   path: "apps/demo/dist"
                   # from git branch and commit hash
-                  key: ${{ runner.os }}-vite-build-${{ github.ref_name }}-${{ github.sha }}
+                  key: build-cache-${{ runner.os }}-${{ github.sha }}
 
             - name: Install pnpm
               uses: pnpm/action-setup@v4
@@ -87,13 +87,14 @@ jobs:
             - name: Checkout
               uses: actions/checkout@v5
 
-            - name: Restore Build Output
+            - name: Restore Build Cache
               id: cache-build-output
               uses: actions/cache@v4
               with:
                   fail-on-cache-miss: true
-                  path: "apps/demo"
-                  key: ${{ runner.os }}-vite-build-${{ github.ref_name }}-${{ github.sha }}
+                  path: "apps/demo/dist"
+                  # from git branch and commit hash
+                  key: build-cache-${{ runner.os }}-${{ github.sha }}
 
             - name: Build & Deploy Worker
               uses: cloudflare/wrangler-action@v3
