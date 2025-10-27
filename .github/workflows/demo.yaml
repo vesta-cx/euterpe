@@ -49,6 +49,7 @@ jobs:
 
     build:
         name: Build Vite Project
+        needs: install
         runs-on: ubuntu-latest
         env:
             ENVIRONMENT: |-
