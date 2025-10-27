@@ -1,5 +1,5 @@
 {
-  "name": "basic",
+  "name": "@vesta-cx/euterpe-demo",
   "type": "module",
   "scripts": {
     "dev": "vite",
