@@ -6,7 +6,7 @@ const euterpe = createApp();
 
 const app = new Hono();
 
-app.route('/euterpe', euterpe);
+app.route("/euterpe", euterpe);
 
 showRoutes(app);
 
