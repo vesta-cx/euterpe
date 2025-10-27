@@ -518,7 +518,9 @@ export async function transcodeFileToJobsInWorkers(
       if (aborted) return;
       aborted = true;
       for (const w of workers) {
-        try { w.terminate(); } catch {}
+        try {
+          w.terminate();
+        } catch {}
       }
     };
     if (signal) {
@@ -544,14 +546,27 @@ export async function transcodeFileToJobsInWorkers(
             onError?.(msg.jobId, msg.message);
           } else if (msg?.type === "done") {
             // chain next job on this worker
-            if (aborted) { try { worker.terminate(); } catch {}; return resolve(); }
+            if (aborted) {
+              try {
+                worker.terminate();
+              } catch {}
+              return resolve();
+            }
             const next = jobs[cursor++];
             if (next) worker.postMessage({ type: "run", file, job: next });
-            else { worker.terminate(); resolve(); }
+            else {
+              worker.terminate();
+              resolve();
+            }
           }
         };
 
-        if (aborted) { try { worker.terminate(); } catch {}; return resolve(); }
+        if (aborted) {
+          try {
+            worker.terminate();
+          } catch {}
+          return resolve();
+        }
         worker.postMessage({ type: "run", file, job });
       });
 
