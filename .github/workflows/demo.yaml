@@ -26,37 +26,6 @@ on:
                     - staging
                     - development
 jobs:
-    install:
-        name: Install Dependencies
-        runs-on: ubuntu-latest
-        steps:
-            - name: Checkout
-              uses: actions/checkout@v5
-
-            # - name: Cache Node Modules
-            #   id: cache-node-modules
-            #   uses: actions/cache@v4
-            #   with:
-            #       path: "**/node_modules"
-            #       key: ${{ runner.os }}-node-modules-${{ hashFiles('pnpm-lock.yaml') }}
-
-            - name: Install pnpm
-              if: steps.cache-node-modules.outputs.cache-hit != 'true'
-              uses: pnpm/action-setup@v4
-              with:
-                  run_install: false
-
-            - name: Install Node.js
-              if: steps.cache-node-modules.outputs.cache-hit != 'true'
-              uses: actions/setup-node@v4
-              with:
-                  node-version: ${{ vars.NODE_VERSION }}
-                  cache: "pnpm"
-
-            - name: Install dependencies
-              if: steps.cache-node-modules.outputs.cache-hit != 'true'
-              run: pnpm install
-
     build:
         name: Build Vite Project
         runs-on: ubuntu-latest
@@ -74,13 +43,6 @@ jobs:
             - name: Checkout
               uses: actions/checkout@v5
 
-            # - name: Restore Cached Node Modules
-            #   id: cache-node-modules
-            #   uses: actions/cache@v4
-            #   with:
-            #       path: "**/node_modules"
-            #       key: ${{ runner.os }}-node-modules-${{ hashFiles('pnpm-lock.yaml') }}
-
             - name: Cache Build Output
               id: cache-build-output
               uses: actions/cache@v4
@@ -95,17 +57,16 @@ jobs:
                   run_install: false
 
             - name: Install Node.js
-              uses: actions/setup-node@v4
+              uses: actions/setup-node@v6
               with:
                   node-version: ${{ vars.NODE_VERSION }}
                   cache: "pnpm"
 
-            # - name: Install modules if not cached
-            #   if: steps.cache-node-modules.outputs.cache-hit != 'true'
-            #   run: pnpm install --filter @vesta-cx/euterpe-demo
+            - name: Install dependencies
+              run: pnpm install
 
             - name: Build Vite Project
-              run: pnpm run build --filter=@vesta-cx/euterpe-demo -- --mode ${{ env.ENVIRONMENT }}
+              run: pnpm build --filter=@vesta-cx/euterpe-demo -- --mode ${{ env.ENVIRONMENT }}
 
     deploy:
         name: Deploy to Cloudflare Workers
