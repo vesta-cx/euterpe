@@ -1,6 +1,6 @@
 name: Build and Deploy to Cloudflare Workers
 env:
-    PATH: "apps/demo"
+    PROJECT: "apps/demo"
 on:
     push:
         branches:
@@ -8,14 +8,14 @@ on:
             - staging
             - dev
         paths:
-            - "${{ env.PATH }}/**"
+            - "${{ env.PROJECT }}/**"
     pull_request:
         branches:
             - main
             - staging
             - dev
         paths:
-            - "${{ env.PATH }}/**"
+            - "${{ env.PROJECT }}/**"
     workflow_dispatch:
         inputs:
             environment:
@@ -39,8 +39,8 @@ jobs:
               id: cache-node-modules
               uses: actions/cache@v4
               with:
-                  path: "${{ env.PATH }}/node_modules"
-                  key: ${{ runner.os }}-node-modules-${{ hashFiles('${{ env.PATH }}/pnpm-lock.yaml') }}
+                  path: "${{ env.PROJECT }}/node_modules"
+                  key: ${{ runner.os }}-node-modules-${{ hashFiles('${{ env.PROJECT }}/pnpm-lock.yaml') }}
 
             - name: Install pnpm
               if: steps.cache-node-modules.outputs.cache-hit != 'true'
@@ -78,14 +78,14 @@ jobs:
               id: cache-node-modules
               uses: actions/cache@v4
               with:
-                  path: "${{ env.PATH }}/node_modules"
-                  key: ${{ runner.os }}-node-modules-${{ hashFiles('${{ env.PATH }}/pnpm-lock.yaml') }}
+                  path: "${{ env.PROJECT }}/node_modules"
+                  key: ${{ runner.os }}-node-modules-${{ hashFiles('${{ env.PROJECT }}/pnpm-lock.yaml') }}
 
             - name: Cache Build Output
               id: cache-build-output
               uses: actions/cache@v4
               with:
-                  path: "${{ env.PATH }}/dist"
+                  path: "${{ env.PROJECT }}/dist"
                   # from git branch and commit hash
                   key: ${{ runner.os }}-vite-build-${{ github.ref_name }}-${{ github.sha }}
 
@@ -130,7 +130,7 @@ jobs:
               uses: actions/cache@v4
               with:
                   fail-on-cache-miss: true
-                  path: "${{ env.PATH }}/dist"
+                  path: "${{ env.PROJECT }}/dist"
                   key: ${{ runner.os }}-vite-build-${{ github.ref_name }}-${{ github.sha }}
 
             - name: Build & Deploy Worker
