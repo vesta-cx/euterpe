@@ -56,13 +56,6 @@ jobs:
             - name: Install dependencies
               run: pnpm install
 
-            - name: Cache Node Modules
-              id: cache-node-modules
-              uses: actions/cache/save@v4
-              with:
-                  path: "**/node_modules"
-                  key: node-modules-cache-${{ runner.os }}-${{ github.sha }}
-
             - name: Build Vite Project
               run: pnpm build --filter=@vesta-cx/euterpe-demo -- --mode ${{ env.ENVIRONMENT }}
 
@@ -105,12 +98,8 @@ jobs:
                   node-version: ${{ vars.NODE_VERSION }}
                   cache: "pnpm"
 
-            - name: Cache Node Modules
-              id: cache-node-modules
-              uses: actions/cache/restore@v4
-              with:
-                  path: "**/node_modules"
-                  key: node-modules-cache-${{ runner.os }}-${{ github.sha }}
+            - name: Install dependencies
+              run: pnpm install
 
             - name: Restore Build Cache
               id: cache-build-output
