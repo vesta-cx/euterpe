@@ -52,6 +52,7 @@ jobs:
                   key: node-modules-cache-${{ runner.os }}-${{ hashFiles('pnpm-lock.yaml') }}
 
             - name: Install dependencies
+              if: steps.cache-node-modules.outputs.cache-hit != 'true'
               run: pnpm install
 
     build:
