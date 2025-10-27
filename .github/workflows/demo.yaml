@@ -1,4 +1,6 @@
 name: Build and Deploy to Cloudflare Workers
+env:
+    PATH: "apps/demo"
 on:
     push:
         branches:
@@ -25,8 +27,6 @@ on:
                     - production
                     - staging
                     - development
-env:
-    PATH: "apps/demo"
 jobs:
     install:
         name: Install Dependencies
@@ -45,8 +45,7 @@ jobs:
             - name: Install pnpm
               if: steps.cache-node-modules.outputs.cache-hit != 'true'
               uses: pnpm/action-setup@v4
-              run_install:
-                  - recursive: false
+              run_install: false
 
             - name: Install Node.js
               if: steps.cache-node-modules.outputs.cache-hit != 'true'
@@ -92,8 +91,7 @@ jobs:
 
             - name: Install pnpm
               uses: pnpm/action-setup@v4
-              run_install:
-                  - recursive: false
+              run_install: false
 
             - name: Install Node.js
               uses: actions/setup-node@v4
