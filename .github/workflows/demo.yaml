@@ -1,4 +1,4 @@
-name: Build and Deploy to Cloudflare Workers
+name: Build & Deploy Euterpe Demo
 on:
     push:
         branches:
