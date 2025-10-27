@@ -19,7 +19,7 @@ on:
             environment:
                 description: "Environment to deploy to"
                 required: true
-                default: "staging"
+                default: "development"
                 type: string
                 options:
                     - production
