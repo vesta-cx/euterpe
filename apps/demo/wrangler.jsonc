@@ -9,7 +9,7 @@
     },
     "routes": [
         {
-            "pattern": "demo.vesta.cx/euterpe",
+            "pattern": "demo.vesta.cx",
             "zone_name": "vesta.cx",
             "custom_domain": true,
         },
@@ -28,7 +28,7 @@
             "name": "euterpe-demo-dev",
             "routes": [
                 {
-                    "pattern": "dev.demo.vesta.cx/euterpe",
+                    "pattern": "dev.demo.vesta.cx",
                     "zone_name": "vesta.cx",
                     "custom_domain": true,
                 },
@@ -42,7 +42,7 @@
             "name": "euterpe-demo-staging",
             "routes": [
                 {
-                    "pattern": "staging.demo.vesta.cx/euterpe",
+                    "pattern": "staging.demo.vesta.cx",
                     "zone_name": "vesta.cx",
                     "custom_domain": true,
                 },
