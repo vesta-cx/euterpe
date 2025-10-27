@@ -17,7 +17,6 @@
     ],
     "env": {
         "production": {
-            "name": "euterpe-demo-prod",
             "routes": [
                 {
                     "pattern": "demo.vesta.cx/euterpe/*",
@@ -26,21 +25,9 @@
             ],
         },
         "development": {
-            "name": "euterpe-demo-dev",
-            "routes": [
-                {
-                    "pattern": "dev.demo.vesta.cx",
-                    "zone_name": "vesta.cx",
-                    "custom_domain": true,
-                },
-                {
-                    "pattern": "dev.demo.vesta.cx/euterpe/*",
-                    "zone_name": "vesta.cx",
-                },
-            ],
+            "routes": [],
         },
         "staging": {
-            "name": "euterpe-demo-staging",
             "routes": [
                 {
                     "pattern": "staging.demo.vesta.cx",
