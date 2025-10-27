@@ -103,7 +103,7 @@ jobs:
               run: pnpm install --filter @vesta-cx/euterpe-demo
 
             - name: Build Vite Project
-              run: pnpm run build --filter @vesta-cx/euterpe-demo --mode ${{ env.ENVIRONMENT }}
+              run: pnpm run build --filter=@vesta-cx/euterpe-demo -- --mode ${{ env.ENVIRONMENT }}
 
     deploy:
         name: Deploy to Cloudflare Workers
@@ -130,7 +130,7 @@ jobs:
               uses: actions/cache@v4
               with:
                   fail-on-cache-miss: true
-                  path: "apps/demo/dist"
+                  path: "apps/demo"
                   key: ${{ runner.os }}-vite-build-${{ github.ref_name }}-${{ github.sha }}
 
             - name: Build & Deploy Worker
