@@ -29,7 +29,6 @@ jobs:
     deploy:
         name: Build & Deploy to Cloudflare Workers
         runs-on: ubuntu-latest
-        needs: build
         timeout-minutes: 60
         environment:
             name: "Cloudflare Workers CI/CD"
