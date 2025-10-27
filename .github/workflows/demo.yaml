@@ -133,4 +133,4 @@ jobs:
 
       - name: Log Cloudflare Worker deployment details
         run: |
-          echo "URL: ${{ steps.wrangler.outputs.deployment-url }} >> $GITHUB_OUTPUT"
+          echo "URL: ${{ steps.wrangler.outputs.deployment-url }} >> $GITHUB_STEP_SUMMARY"
