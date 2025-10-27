@@ -1,6 +1,6 @@
 {
   "$schema": "node_modules/wrangler/config-schema.json",
-  "name": "demo",
+  "name": "euterpe-demo",
   "main": "./dist/index.js",
   "compatibility_date": "2025-10-27",
   "compatibility_flags": [
@@ -8,6 +8,35 @@
   ],
   "assets": {
     "directory": "./dist"
+  },
+  "routes": [
+    {
+      "pattern": "demo.vesta.cx/euterpe/*",
+      "zone_name": "vesta.cx"
+    }
+  ],
+  "env": {
+    "production": {
+      "name": "euterpe-demo-prod",
+      "route": {
+        "pattern": "demo.vesta.cx/euterpe/*",
+        "zone_name": "vesta.cx"
+      }
+    },
+    "development": {
+      "name": "euterpe-demo-dev",
+      "route": {
+        "pattern": "dev.demo.vesta.cx/euterpe/*",
+        "zone_name": "vesta.cx"
+      }
+    },
+    "staging": {
+      "name": "euterpe-demo-staging",
+      "route": {
+        "pattern": "staging.demo.vesta.cx/euterpe/*",
+        "zone_name": "vesta.cx"
+      }
+    }
   }
   // "vars": {
   //   "MY_VAR": "my-variable"
