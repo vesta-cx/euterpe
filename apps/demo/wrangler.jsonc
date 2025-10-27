@@ -13,6 +13,7 @@
       "zone_name": "vesta.cx",
       "custom_domain": true
     },
+    
   ],
   "env": {
     "production": {
