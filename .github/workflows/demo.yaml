@@ -96,6 +96,11 @@ jobs:
                   # from git branch and commit hash
                   key: build-cache-${{ runner.os }}-${{ github.sha }}
 
+            - name: Install pnpm
+              uses: pnpm/action-setup@v4
+              with:
+                  run_install: false
+            
             - name: Build & Deploy Worker
               uses: cloudflare/wrangler-action@v3
               with:
