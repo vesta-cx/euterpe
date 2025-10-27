@@ -7,6 +7,7 @@
     "assets": {
         "directory": "./dist",
     },
+    "preview_urls": true,
     "routes": [
         {
             "pattern": "demo.vesta.cx",
