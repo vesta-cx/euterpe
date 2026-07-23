@@ -22,7 +22,7 @@
     "test:load": "node ./scripts/transcode-load-check.mjs"
   },
   "dependencies": {
-    "@hono/node-server": "^1.19.0",
+    "@hono/node-server": "^2.0.11",
     "@libsql/client": "^0.17.0",
     "@vesta-cx/storage": "workspace:*",
     "@vesta-cx/utils": "^1.0.0",
